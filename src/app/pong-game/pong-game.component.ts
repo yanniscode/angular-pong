@@ -16,8 +16,8 @@ export class PongGameComponent implements OnInit {
   private ballImageLoaded = false;
 
   // Dimensions
-  private width = 800;
-  private height = 600;
+  private width = 1330;
+  private height = 1000;
   private paddleHeight = 100;
   private paddleWidth = 15;
   private ballSize = 150; // 150px comme demandé
