@@ -1,0 +1,17 @@
+<p>pong-game works!</p>
+<div class="game-container">
+    <canvas #gameCanvas width="800" height="600"></canvas>
+    <div class="score">{{ playerScore }} - {{ computerScore }}</div>
+    <div class="instructions" *ngIf="!gameStarted">
+      <p>Appuyez sur ESPACE pour commencer</p>
+      <p>Utilisez les touches HAUT et BAS pour déplacer la raquette</p>
+    </div>
+    <div class="game-over" *ngIf="gameOver">
+      <h2>Partie terminée!</h2>
+      <p>{{ winner }} a gagné!</p>
+      <button (click)="resetGame()">Nouvelle partie</button>
+    </div>
+
+    <!-- Image cachée pour le ballon -->
+    <img #ballImage src="/assets/logo.svg" style="display: none; width:150px" />
+  </div>
