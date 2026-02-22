@@ -20,7 +20,7 @@ export class PongGameComponent implements OnInit {
   private height = 1000;
   private paddleHeight = 100;
   private paddleWidth = 15;
-  private ballSize = 150; // 150px comme demandé
+  private ballSize = 50;
 
   // Positions et vitesses
   private playerY = 250;
@@ -96,7 +96,9 @@ export class PongGameComponent implements OnInit {
 
   private resetAiParams(): void {
     // Paramètres qui rendent l'IA imparfaite
+    // this.aiReactionDelay = 0; // IA difficile
     this.aiReactionDelay = Math.random() * 500 + 100; // Entre 100ms et 600ms de délai de réaction
+    // this.aiErrorMargin = 0; // IA difficile
     this.aiErrorMargin = Math.random() * 60 + 20; // Entre 20px et 80px d'erreur
     this.lastAiUpdate = 0;
     this.aiTargetY = this.computerY;
@@ -178,7 +180,7 @@ export class PongGameComponent implements OnInit {
     if (this.ballX < this.paddleWidth) {
       if (this.ballY > this.playerY - this.ballSize / 2 &&
           this.ballY < this.playerY + this.paddleHeight - this.ballSize / 2) {
-        this.ballSpeedX = -this.ballSpeedX;
+        this.ballSpeedX = -this.ballSpeedX - 0.1;
 
         // Variation de l'angle en fonction du point d'impact
         const deltaY = this.ballY - (this.playerY + this.paddleHeight/2);
@@ -190,7 +192,7 @@ export class PongGameComponent implements OnInit {
     if (this.ballX > this.width - this.paddleWidth - this.ballSize) {
       if (this.ballY > this.computerY - this.ballSize / 2 &&
           this.ballY < this.computerY + this.paddleHeight - this.ballSize / 2) {
-        this.ballSpeedX = -this.ballSpeedX;
+        this.ballSpeedX = -this.ballSpeedX - 0.1;
 
         // Variation de l'angle en fonction du point d'impact
         const deltaY = this.ballY - (this.computerY + this.paddleHeight/2);
@@ -226,7 +228,9 @@ export class PongGameComponent implements OnInit {
 
   private drawEverything(): void {
     // Effacer le canvas
-    this.ctx.fillStyle = 'black';
+    this.ctx.clearRect(0, 0, this.width, this.height);
+
+    this.ctx.fillStyle = 'transparent';
     this.ctx.fillRect(0, 0, this.width, this.height);
 
     // Ligne centrale
